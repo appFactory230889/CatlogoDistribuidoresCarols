@@ -21,3 +21,5 @@ const SEED_ITEMS = [
   { id: "1701", code: "1701", title: "Vestido Largo 1701", category: "Vestidos Largos", price1: "690", price2: "760", image: "assets/img/vestidoslargos.png" },
   { id: "1801", code: "1801", title: "Estilo Especial 1801", category: "Otros Estilos", price1: "470", price2: "540", image: "assets/img/estilos.png" }
 ];
+
+const FIREBASE_DB_URL = "https://distribuidora-carols-default-rtdb.firebaseio.com";

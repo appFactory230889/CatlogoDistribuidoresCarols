@@ -19,6 +19,46 @@ function saveCatalog(items) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
 }
 
+function normalizeItem(raw, fallbackCategory) {
+  if (!raw || typeof raw !== "object") return null;
+  const code = String(raw.codigo || raw.code || "").trim();
+  const category = String(raw.categoria || raw.category || fallbackCategory || "").trim();
+  const image = String(raw.foto || raw.image || "").trim();
+  const price1 = String(raw.precio1 || raw.price1 || "").trim();
+  const price2 = String(raw.precio2 || raw.price2 || "").trim();
+  if (!code) return null;
+  return {
+    id: code,
+    code,
+    title: String(raw.title || `Prenda ${code}`),
+    category,
+    price1,
+    price2,
+    image: image || "assets/img/logo.jpg"
+  };
+}
+
+async function fetchFirebasePath(path, fallbackCategory) {
+  const response = await fetch(`${FIREBASE_DB_URL}/${path}.json`);
+  if (!response.ok) {
+    throw new Error(`Firebase respondio con ${response.status}`);
+  }
+  const data = await response.json();
+  if (!data || typeof data !== "object") return [];
+  return Object.values(data)
+    .map((item) => normalizeItem(item, fallbackCategory))
+    .filter(Boolean);
+}
+
+async function loadRemoteCatalog(categoryName) {
+  const path = categoryName ? `CATALOGO/${encodeURIComponent(categoryName)}` : "CATALOGO/Todas%20las%20prendas";
+  const items = await fetchFirebasePath(path, categoryName || "");
+  if (!items.length) {
+    throw new Error("No llegaron prendas desde Firebase");
+  }
+  return items;
+}
+
 function getCategoryInfo(categoryName) {
   return CATEGORY_INFO.find((item) => item.category === categoryName);
 }
@@ -56,6 +96,10 @@ function renderCatalog(target, items) {
     return;
   }
   target.innerHTML = items.map(createProductCard).join("");
+}
+
+function setResultsText(target, text) {
+  if (target) target.textContent = text;
 }
 
 function initHomePage(items) {
@@ -99,6 +143,36 @@ function initSearchPage(items) {
   };
   if (input) input.addEventListener("input", update);
   update();
+}
+
+async function hydrateCategoryPage(categoryName) {
+  const grid = document.querySelector("[data-catalog-grid]");
+  const count = document.querySelector("[data-results-count]");
+  if (grid) {
+    grid.innerHTML = `<div class="empty-state"><h3>Cargando prendas...</h3><p>Estamos consultando la categoria en Firebase.</p></div>`;
+  }
+  try {
+    const remoteItems = await loadRemoteCatalog(categoryName);
+    initCategoryPage(remoteItems, categoryName);
+  } catch (error) {
+    initCategoryPage(getCatalog(), categoryName);
+    setResultsText(count, `Mostrando datos locales de respaldo para ${categoryName}`);
+  }
+}
+
+async function hydrateSearchPage() {
+  const grid = document.querySelector("[data-catalog-grid]");
+  const count = document.querySelector("[data-results-count]");
+  if (grid) {
+    grid.innerHTML = `<div class="empty-state"><h3>Cargando catalogo...</h3><p>Estamos consultando todas las prendas en Firebase.</p></div>`;
+  }
+  try {
+    const remoteItems = await loadRemoteCatalog("");
+    initSearchPage(remoteItems);
+  } catch (error) {
+    initSearchPage(getCatalog());
+    setResultsText(count, "Mostrando datos locales de respaldo");
+  }
 }
 
 function fillCategoryOptions(select) {
@@ -242,14 +316,14 @@ function initCropperPage() {
   }
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
   const page = document.body.dataset.page || "";
   const category = document.body.dataset.category || "";
   const items = getCatalog();
   setActiveNav(page === "categoria" ? "busqueda" : page);
   if (page === "inicio") initHomePage(items);
-  if (page === "busqueda") initSearchPage(items);
-  if (page === "categoria") initCategoryPage(items, category);
+  if (page === "busqueda") await hydrateSearchPage();
+  if (page === "categoria") await hydrateCategoryPage(category);
   if (page === "agregar") initAddPage(items);
   if (page === "editor") initEditorPage(items);
   if (page === "cropper" || page === "mycrop") initCropperPage();
