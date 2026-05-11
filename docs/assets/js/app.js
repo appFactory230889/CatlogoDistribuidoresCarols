@@ -107,12 +107,6 @@ function initHomePage(items) {
   const featuredGrid = document.querySelector("[data-featured-grid]");
   if (categoryGrid) categoryGrid.innerHTML = CATEGORY_INFO.map(createCategoryCard).join("");
   if (featuredGrid) renderCatalog(featuredGrid, items.slice(0, 4));
-  const totalItems = document.querySelector("[data-total-items]");
-  const totalCategories = document.querySelector("[data-total-categories]");
-  const totalEditable = document.querySelector("[data-total-editable]");
-  if (totalItems) totalItems.textContent = String(items.length);
-  if (totalCategories) totalCategories.textContent = String(CATEGORY_INFO.length);
-  if (totalEditable) totalEditable.textContent = "100%";
 }
 
 function initCategoryPage(items, categoryName) {
