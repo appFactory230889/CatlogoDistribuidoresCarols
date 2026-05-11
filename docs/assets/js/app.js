@@ -87,7 +87,7 @@ function createCategoryCard(category) {
 
 function createProductCard(item) {
   const titlePill = item.title && item.title !== `Prenda ${item.code}` ? `<span class="pill">${item.title}</span>` : "";
-  return `<article class="catalog-item"><div class="catalog-item-figure"><img src="${item.image}" alt="${item.title}"></div><div class="catalog-meta"><span class="pill">${item.category}</span>${titlePill}</div><div class="price-list"><div><strong>Precio en tallas de la XXS a la L:</strong> $ ${item.price1}</div><div><strong>Precio en tallas de la XL a la 2XL:</strong> $ ${item.price2}</div></div><div class="inline-actions"><a class="btn btn-secondary" href="${item.image}" download="catalogo-${item.code}.jpg">Descargar</a></div></article>`;
+  return `<article class="catalog-item"><div class="catalog-item-figure"><img src="${item.image}" alt="${item.title}"></div><div class="catalog-meta">${titlePill}</div><div class="price-list"><div><strong>Precio en tallas de la XXS a la L:</strong> $ ${item.price1}</div><div><strong>Precio en tallas de la XL a la 2XL:</strong> $ ${item.price2}</div></div><div class="inline-actions"><a class="btn btn-secondary" href="${item.image}" download="catalogo-${item.code}.jpg">Descargar</a></div></article>`;
 }
 
 function renderCatalog(target, items) {
