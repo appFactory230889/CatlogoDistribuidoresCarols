@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cropper | Catalogo Carol's</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body class="shell" data-page="cropper">
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="index.html">
+        <img class="brand-logo" src="assets/img/iconosf.png" alt="Logo Carol's">
+        <div class="brand-copy"><span>Flujo auxiliar</span><strong>Cropper Web</strong></div>
+      </a>
+      <nav class="top-nav">
+        <a data-nav="inicio" href="index.html">Inicio</a>
+        <a data-nav="busqueda" href="busqueda-general.html">Busqueda</a>
+        <a data-nav="agregar" href="agregar-prendas.html">Agregar</a>
+      </nav>
+    </div>
+  </header>
+  <main class="content">
+    <section class="crop-layout">
+      <article class="form-card">
+        <h1>Recorte visual de imagen</h1>
+        <p>La app Android usaba un flujo nativo de recorte. En esta version web se reemplaza por una previsualizacion con zoom para preparar la imagen antes de guardarla.</p>
+        <div class="field-group">
+          <div class="field"><label for="crop-file">Selecciona una imagen</label><input id="crop-file" data-crop-input type="file" accept="image/*"></div>
+          <div class="field"><label for="zoom">Zoom</label><input id="zoom" data-crop-range type="range" min="80" max="160" value="100"><small>Escala actual: <span data-crop-value>100%</span></small></div>
+          <div class="page-actions"><a class="button-link" href="agregar-prendas.html">Volver a agregar prenda</a><a class="ghost-link" href="my-crop.html">Abrir MyCropActivity</a></div>
+        </div>
+      </article>
+      <article class="form-card">
+        <div class="preview-card">
+          <img class="hide" data-crop-image src="" alt="Vista previa del recorte">
+          <div class="preview-placeholder"><p>La imagen seleccionada aparecera aqui.</p></div>
+        </div>
+      </article>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <div class="site-footer-inner"><div><strong>CropperActivity</strong><br>Adaptado a navegador.</div><div>Vista previa sin dependencias nativas.</div></div>
+  </footer>
+  <script src="assets/js/catalog-data.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

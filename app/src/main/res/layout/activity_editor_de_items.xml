@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:orientation="vertical"
+    android:padding="5dp"
+    android:background="@color/white"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EditorDeItems">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Distribuidora Carol´s"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/imgLogo"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Editor de Items"
+            app:layout_constraintEnd_toStartOf="@+id/imgLogo"
+            app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+        <View
+            android:id="@+id/view3"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/black"
+            app:layout_constraintBottom_toBottomOf="@+id/textView5" />
+
+        <ImageView
+            android:id="@+id/imgLogo"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/iconosf" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/btnEliminar"
+                android:layout_gravity="right"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/borde_redondo"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:text="Eliminar"/>
+
+
+            <ImageView
+                android:id="@+id/imgFotoPrenda"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_width="300dp"
+                android:layout_height="350dp"
+                app:srcCompat="@drawable/logo" />
+
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Precio en talla XXS-L" />
+
+            <EditText
+                android:id="@+id/edtPrecio1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14dp"
+                android:inputType="numberDecimal" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="Precio en talla XL-XXL" />
+
+            <EditText
+                android:id="@+id/edtPrecio2"
+                android:textSize="14dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal" />
+
+            <Button
+                android:id="@+id/btnGuardar"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/borde_redondo"
+                android:textColor="@color/white"
+                android:layout_marginBottom="50dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Guardar cambios" />
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_gravity="center"
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginBottom="50dp"
+                android:visibility="gone"
+                android:layout_centerInParent="true"/>
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+</LinearLayout>

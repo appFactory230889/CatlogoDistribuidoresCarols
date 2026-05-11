@@ -1,0 +1,476 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:orientation="vertical"
+    android:padding="5dp"
+    android:background="@color/white"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Confecciones Carol´s"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/imgLogo"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Catálogo"
+            app:layout_constraintEnd_toStartOf="@+id/imgLogo"
+            app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+        <View
+            android:id="@+id/view3"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/black"
+            app:layout_constraintBottom_toBottomOf="@+id/textView5" />
+
+        <ImageView
+            android:id="@+id/imgLogo"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/iconosf" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp">
+
+                        <Button
+                            android:id="@+id/btnAgregarPrenda"
+                            android:layout_width="wrap_content"
+                            android:layout_height="40dp"
+                            android:layout_marginStart="15dp"
+                            android:background="@drawable/borde_redondo"
+                            android:text="Agregar Prenda"
+                            android:visibility="gone"
+                            android:textColor="@color/white"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <Button
+                            android:id="@+id/btnBusqueda"
+                            android:layout_width="wrap_content"
+                            android:layout_height="40dp"
+                            android:layout_marginEnd="15dp"
+                            android:background="@drawable/borde_redondo"
+                            android:text="Buscar por código"
+                            android:textColor="@color/white"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <View
+                            android:id="@+id/view4"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/black"
+                            app:layout_constraintBottom_toBottomOf="parent" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_marginBottom="50dp"
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:id="@+id/linearLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="170dp">
+
+
+                        <ImageView
+                            android:id="@+id/imgTemporada"
+                            android:clickable="true"
+                            android:layout_width="match_parent"
+                            android:layout_height="170dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/temporada" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="250dp"
+                        android:layout_weight="0.5">
+
+
+                        <RelativeLayout
+                            android:id="@+id/conjuntosConFalda"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.5"
+                            android:clickable="true">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true">
+
+                                <ImageView
+                                    android:id="@+id/icoDeConjuntosConFalda"
+                                    android:layout_width="150dp"
+                                    android:layout_height="150dp"
+                                    android:layout_centerHorizontal="true"
+                                    android:adjustViewBounds="true"
+                                    android:background="@color/white"
+                                    android:clickable="true"
+                                    android:padding="5dp"
+                                    android:src="@drawable/conjuntosconfalda" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/icoDeConjuntosConFalda"
+                                    android:layout_centerHorizontal="true"
+                                    android:text="Conjuntos con Falda"
+                                    android:textAlignment="center"
+                                    android:textStyle="bold" />
+
+                            </RelativeLayout>
+
+                        </RelativeLayout>
+
+
+                        <RelativeLayout
+                            android:id="@+id/conjuntosConPantalon"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.5"
+                            android:clickable="true">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true">
+
+                                <ImageView
+                                    android:id="@+id/iconoConjuntosConPantalon"
+                                    android:layout_width="150dp"
+                                    android:layout_height="150dp"
+                                    android:layout_centerHorizontal="true"
+                                    android:adjustViewBounds="true"
+                                    android:background="@color/white"
+                                    android:padding="5dp"
+                                    android:src="@drawable/conjuntoconpantalon" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/iconoConjuntosConPantalon"
+                                    android:layout_centerHorizontal="true"
+                                    android:text="Conjuntos Con Pantalón"
+                                    android:textAlignment="center"
+                                    android:textSize="15dp"
+                                    android:textStyle="bold" />
+
+                            </RelativeLayout>
+
+                        </RelativeLayout>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="250dp"
+                        android:layout_weight="0.5">
+
+
+                        <RelativeLayout
+                            android:id="@+id/enterizos"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.5"
+                            android:clickable="true">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true">
+
+                                <ImageView
+                                    android:id="@+id/iconoEnterizos"
+                                    android:layout_width="150dp"
+                                    android:layout_height="150dp"
+                                    android:layout_centerHorizontal="true"
+                                    android:adjustViewBounds="true"
+                                    android:background="@color/white"
+                                    android:padding="5dp"
+                                    android:src="@drawable/enterizos" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/iconoEnterizos"
+                                    android:layout_centerHorizontal="true"
+                                    android:text="Enterizos"
+                                    android:textAlignment="center"
+                                    android:textSize="15dp"
+                                    android:textStyle="bold" />
+
+                            </RelativeLayout>
+
+                        </RelativeLayout>
+
+
+                        <RelativeLayout
+                            android:id="@+id/faldas"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.5"
+                            android:clickable="true">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true">
+
+                                <ImageView
+                                    android:id="@+id/iconoFaldas"
+                                    android:layout_width="150dp"
+                                    android:layout_height="150dp"
+                                    android:layout_centerHorizontal="true"
+                                    android:adjustViewBounds="true"
+                                    android:background="@color/white"
+                                    android:padding="5dp"
+                                    android:src="@drawable/faldas" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/iconoFaldas"
+                                    android:layout_centerHorizontal="true"
+                                    android:text="Faldas"
+                                    android:textAlignment="center"
+                                    android:textSize="15dp"
+                                    android:textStyle="bold" />
+
+                            </RelativeLayout>
+
+                        </RelativeLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="250dp"
+                        android:layout_weight="0.5">
+
+
+                        <RelativeLayout
+                            android:id="@+id/tops"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.5"
+                            android:clickable="true">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true">
+
+                                <ImageView
+                                    android:id="@+id/iconoTops"
+                                    android:layout_width="150dp"
+                                    android:layout_height="150dp"
+                                    android:layout_centerHorizontal="true"
+                                    android:adjustViewBounds="true"
+                                    android:background="@color/white"
+                                    android:padding="5dp"
+                                    android:src="@drawable/tops" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/iconoTops"
+                                    android:layout_centerHorizontal="true"
+                                    android:text="Tops"
+                                    android:textAlignment="center"
+                                    android:textSize="15dp"
+                                    android:textStyle="bold" />
+
+                            </RelativeLayout>
+
+                        </RelativeLayout>
+
+
+                        <RelativeLayout
+                            android:id="@+id/vestidosCortos"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.5"
+                            android:clickable="true">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true">
+
+                                <ImageView
+                                    android:id="@+id/iconoVestidosCortos"
+                                    android:layout_width="150dp"
+                                    android:layout_height="150dp"
+                                    android:layout_centerHorizontal="true"
+                                    android:adjustViewBounds="true"
+                                    android:background="@color/white"
+                                    android:padding="5dp"
+                                    android:src="@drawable/vestidoscortos" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/iconoVestidosCortos"
+                                    android:layout_centerHorizontal="true"
+                                    android:text="Vestidos Cortos"
+                                    android:textAlignment="center"
+                                    android:textSize="15dp"
+                                    android:textStyle="bold" />
+
+                            </RelativeLayout>
+
+                        </RelativeLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="250dp"
+                        android:layout_weight="0.5">
+
+
+                        <RelativeLayout
+                            android:id="@+id/vestidosLargos"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.5"
+                            android:clickable="true">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true">
+
+                                <ImageView
+                                    android:id="@+id/iconoVestidosLargos"
+                                    android:layout_width="150dp"
+                                    android:layout_height="150dp"
+                                    android:layout_centerHorizontal="true"
+                                    android:adjustViewBounds="true"
+                                    android:background="@color/white"
+                                    android:padding="5dp"
+                                    android:src="@drawable/vestidoslargos" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/iconoVestidosLargos"
+                                    android:layout_centerHorizontal="true"
+                                    android:text="Vestidos Largos"
+                                    android:textAlignment="center"
+                                    android:textSize="15dp"
+                                    android:textStyle="bold" />
+
+                            </RelativeLayout>
+
+                        </RelativeLayout>
+
+
+                        <RelativeLayout
+                            android:id="@+id/otrosEstilos"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.5"
+                            android:clickable="true">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true">
+
+                                <ImageView
+                                    android:id="@+id/iconoOtrosEstilos"
+                                    android:layout_width="150dp"
+                                    android:layout_height="150dp"
+                                    android:layout_centerHorizontal="true"
+                                    android:adjustViewBounds="true"
+                                    android:background="@color/white"
+                                    android:padding="5dp"
+                                    android:src="@drawable/estilos" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/iconoOtrosEstilos"
+                                    android:layout_centerHorizontal="true"
+                                    android:text="Otros Estilos"
+                                    android:textAlignment="center"
+                                    android:textSize="15dp"
+                                    android:textStyle="bold" />
+
+                            </RelativeLayout>
+
+                        </RelativeLayout>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/textView20"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="= P O W E R E D   B Y ="/>
+
+                    <TextView
+                        android:id="@+id/textView21"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="APP FACTORY"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"/>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </ScrollView>
+
+    </LinearLayout>
+
+</LinearLayout>

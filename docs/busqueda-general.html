@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Busqueda General | Catalogo Carol's</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body class="shell" data-page="busqueda">
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="index.html">
+        <img class="brand-logo" src="assets/img/iconosf.png" alt="Logo Carol's">
+        <div class="brand-copy"><span>Confecciones Carol's</span><strong>Busqueda General</strong></div>
+      </a>
+      <nav class="top-nav">
+        <a data-nav="inicio" href="index.html">Inicio</a>
+        <a data-nav="busqueda" href="busqueda-general.html">Busqueda</a>
+        <a data-nav="agregar" href="agregar-prendas.html">Agregar</a>
+      </nav>
+    </div>
+  </header>
+  <main class="content">
+    <section class="toolbar form-card">
+      <div><h1>Busqueda general del catalogo</h1><p data-results-count>0 resultados encontrados</p></div>
+      <div class="toolbar-actions"><a class="button-link" href="agregar-prendas.html">Nueva prenda</a></div>
+    </section>
+    <section class="form-card">
+      <div class="field">
+        <label for="search">Buscar por codigo, categoria o titulo</label>
+        <input id="search" class="search-input" data-search type="search" placeholder="Ejemplo: 1501, vestidos, verano">
+      </div>
+    </section>
+    <section class="catalog-grid" data-catalog-grid></section>
+  </main>
+  <footer class="site-footer">
+    <div class="site-footer-inner"><div><strong>Busqueda web</strong><br>Equivalente a `busquedaGeneral`.</div><div>Los cambios se guardan en tu navegador.</div></div>
+  </footer>
+  <script src="assets/js/catalog-data.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

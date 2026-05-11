@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:orientation="vertical"
+    android:padding="5dp"
+    android:background="@color/white"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AgregarPrendas">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Distribuidora Carol´s"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/imgLogo"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Agregar Prendas"
+            app:layout_constraintEnd_toStartOf="@+id/imgLogo"
+            app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+        <View
+            android:id="@+id/view3"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/black"
+            app:layout_constraintBottom_toBottomOf="@+id/textView5" />
+
+        <ImageView
+            android:id="@+id/imgLogo"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/iconosf" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+
+    <!-- Botón cerrar pedido (oculto al inicio) -->
+    <Button
+        android:id="@+id/btnFinalizar"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="right"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/borde_redondo"
+        android:textColor="@color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:text="Finalizar"/>
+
+    <!-- Botón para foto -->
+    <Button
+        android:id="@+id/btnFotoProducto"
+        android:clickable="true"
+        android:background="@drawable/borde_redondo"
+        android:textColor="@color/white"
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:text="Ingresar Imagen de la Prenda" />
+
+    <!-- Imagen de referencia -->
+
+    <FrameLayout
+        android:id="@+id/frameCaptura"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:background="#33000000">
+
+        <ImageView
+            android:id="@+id/imgFotoPrenda"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:background="@android:color/transparent" />
+
+        <!-- Contorno (debajo) -->
+        <TextView
+            android:id="@+id/txtNumeroBorde"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:strokeWidth="6"
+            android:layout_gravity="center"
+            android:shadowColor="#000000"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="3" />
+
+        <!-- Texto principal (encima) -->
+        <TextView
+            android:id="@+id/tvCodigo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:layout_gravity="center" />
+    </FrameLayout>
+
+
+    <TextView
+        android:id="@+id/tvClasificacion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Clasificación" />
+
+    <Spinner
+        android:id="@+id/spinnerClasificacion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/tvAlertaClasificacion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Seleccione una categoria de producto" />
+
+            <EditText
+        android:id="@+id/edtPrecio1"
+        android:textSize="14dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Precio 1 (tallas de XXS-L)"
+        android:layout_marginTop="10dp"
+        android:inputType="numberDecimal" />
+
+            <TextView
+                android:id="@+id/tvAlertaPrecio1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ingrese el precio 1" />
+
+            <EditText
+                android:id="@+id/edtPrecio2"
+                android:textSize="14dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Precio 2 (tallas XL-XXL)"
+                android:layout_marginTop="10dp"
+                android:inputType="numberDecimal" />
+
+    <Button
+        android:id="@+id/btnAsignarCodigo"
+        android:background="@drawable/borde_redondo"
+        android:textColor="@color/white"
+        android:visibility="gone"
+        android:layout_marginBottom="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Asignar código" />
+
+    <Button
+        android:id="@+id/btnCapturar"
+        android:background="@drawable/borde_redondo"
+        android:textColor="@color/white"
+        android:visibility="gone"
+        android:layout_marginBottom="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ScreenShot" />
+
+            <TextView
+                android:id="@+id/tvAlertaPrecio2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ingrese el precio 2" />
+
+            <Button
+        android:id="@+id/btnAgregarPrenda"
+        android:background="@drawable/borde_redondo"
+        android:textColor="@color/white"
+        android:layout_marginBottom="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Guardar y Continuar"
+        android:layout_marginTop="20dp"/>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_gravity="center"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="50dp"
+        android:visibility="gone"
+        android:layout_centerInParent="true"/>
+
+</LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

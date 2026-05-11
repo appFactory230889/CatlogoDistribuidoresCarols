@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Agregar Prendas | Catalogo Carol's</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body class="shell" data-page="agregar">
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="index.html">
+        <img class="brand-logo" src="assets/img/iconosf.png" alt="Logo Carol's">
+        <div class="brand-copy"><span>Distribuidora Carol's</span><strong>Agregar Prendas</strong></div>
+      </a>
+      <nav class="top-nav">
+        <a data-nav="inicio" href="index.html">Inicio</a>
+        <a data-nav="busqueda" href="busqueda-general.html">Busqueda</a>
+        <a data-nav="agregar" href="agregar-prendas.html">Agregar</a>
+      </nav>
+    </div>
+  </header>
+  <main class="content">
+    <div class="notice hide" data-notice></div>
+    <section class="form-layout">
+      <form class="form-card" data-add-form>
+        <div class="field-group">
+          <div class="field"><label for="code">Codigo</label><input id="code" data-code name="code" type="text" readonly><small>Se genera automaticamente tomando el siguiente codigo disponible local.</small></div>
+          <div class="field"><label for="title">Nombre interno</label><input id="title" name="title" type="text" placeholder="Ejemplo: Vestido Corto Floral"></div>
+          <div class="field"><label for="category">Categoria</label><select id="category" data-category-select name="category"></select></div>
+          <div class="field"><label for="price1">Precio 1 (XXS-L)</label><input id="price1" name="price1" type="number" min="0" step="0.01" placeholder="0.00"></div>
+          <div class="field"><label for="price2">Precio 2 (XL-XXL)</label><input id="price2" name="price2" type="number" min="0" step="0.01" placeholder="0.00"></div>
+          <div class="field"><label for="image">Imagen de la prenda</label><input id="image" data-image-input type="file" accept="image/*"><small>La imagen queda guardada en el navegador como reemplazo del flujo Android + Firebase.</small></div>
+          <div class="page-actions"><button class="btn btn-primary" type="submit">Guardar y continuar</button><a class="btn btn-secondary" href="cropper.html">Ir al cropper web</a></div>
+        </div>
+      </form>
+      <section class="form-card">
+        <h2>Vista previa</h2>
+        <p>Replica la captura con codigo sobre la imagen que hacia la app original.</p>
+        <div class="preview-card">
+          <img class="hide" data-preview-image alt="Vista previa de la prenda">
+          <div class="preview-placeholder" data-preview-placeholder><p>Selecciona una imagen para previsualizar la prenda.</p></div>
+          <div class="preview-code" data-preview-code>COD ----</div>
+        </div>
+      </section>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <div class="site-footer-inner"><div><strong>Agregar Prendas</strong><br>Equivalente a `AgregarPrendas`.</div><div>Persistencia local para GitHub Pages.</div></div>
+  </footer>
+  <script src="assets/js/catalog-data.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

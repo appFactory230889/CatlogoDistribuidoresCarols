@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Catalogo Carol's</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body class="shell" data-page="inicio">
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="index.html">
+        <img class="brand-logo" src="assets/img/iconosf.png" alt="Logo Carol's">
+        <div class="brand-copy"><span>Confecciones Carol's</span><strong>Catalogo Web</strong></div>
+      </a>
+      <nav class="top-nav">
+        <a data-nav="inicio" href="index.html">Inicio</a>
+        <a data-nav="busqueda" href="busqueda-general.html">Busqueda</a>
+        <a data-nav="agregar" href="agregar-prendas.html">Agregar</a>
+      </nav>
+    </div>
+  </header>
+  <main class="content">
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Conversion de App a Sitio</p>
+        <h1>Cada activity ahora vive como una pagina web lista para GitHub Pages.</h1>
+        <p>Esta version conserva la estructura del catalogo Android: portada, busqueda general, categorias, alta de prendas, editor y flujo de recorte visual adaptado a navegador.</p>
+        <div class="hero-actions">
+          <a class="button-link" href="busqueda-general.html">Explorar catalogo</a>
+          <a class="ghost-link" href="agregar-prendas.html">Agregar una prenda</a>
+        </div>
+      </div>
+      <div class="hero-media"><img src="assets/img/temporada.jpg" alt="Temporada"></div>
+    </section>
+    <section class="stats">
+      <article class="panel"><strong data-total-items>0</strong><span>prendas iniciales cargadas</span></article>
+      <article class="panel"><strong data-total-categories>0</strong><span>paginas de categoria</span></article>
+      <article class="panel"><strong data-total-editable>0</strong><span>editable desde el navegador</span></article>
+    </section>
+    <section>
+      <div class="section-heading"><div><h2>Categorias principales</h2><p>Equivalen a las pantallas del menu principal de la app Android y se enlazan a su pagina propia.</p></div></div>
+      <div class="category-grid" data-category-grid></div>
+    </section>
+    <section>
+      <div class="section-heading"><div><h2>Accesos de administracion</h2><p>Las pantallas de busqueda, agregar, editar y recorte se adaptaron para web sin depender de Android.</p></div></div>
+      <div class="shortcut-grid">
+        <a class="card" href="busqueda-general.html"><div class="card-copy"><h3>Busqueda General</h3><p>Busca por codigo, categoria o texto SEO como en la app original.</p></div></a>
+        <a class="card" href="agregar-prendas.html"><div class="card-copy"><h3>Agregar Prendas</h3><p>Carga imagen, define categoria y registra precios usando almacenamiento local.</p></div></a>
+        <a class="card" href="cropper.html"><div class="card-copy"><h3>Cropper</h3><p>Version web simplificada del flujo de recorte para previsualizar imagenes.</p></div></a>
+      </div>
+    </section>
+    <section>
+      <div class="section-heading"><div><h2>Prendas destacadas</h2><p>Vista de ejemplo generada desde los datos semilla del sitio.</p></div></div>
+      <div class="catalog-grid" data-featured-grid></div>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <div class="site-footer-inner"><div><strong>Confecciones Carol's</strong><br>Lista para publicarse en GitHub Pages.</div><div>Powered by App Factory - conversion web estatica</div></div>
+  </footer>
+  <script src="assets/js/catalog-data.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

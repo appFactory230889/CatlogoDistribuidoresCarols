@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Editor de Items | Catalogo Carol's</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body class="shell" data-page="editor">
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="index.html">
+        <img class="brand-logo" src="assets/img/iconosf.png" alt="Logo Carol's">
+        <div class="brand-copy"><span>Distribuidora Carol's</span><strong>Editor de Items</strong></div>
+      </a>
+      <nav class="top-nav">
+        <a data-nav="inicio" href="index.html">Inicio</a>
+        <a data-nav="busqueda" href="busqueda-general.html">Busqueda</a>
+        <a data-nav="agregar" href="agregar-prendas.html">Agregar</a>
+      </nav>
+    </div>
+  </header>
+  <main class="content">
+    <div class="notice hide" data-notice></div>
+    <section class="editor-layout">
+      <article class="form-card">
+        <div class="preview-card" style="min-height: 420px;"><img data-editor-image src="assets/img/logo.jpg" alt="Prenda a editar"></div>
+        <h2 data-editor-title>Selecciona una prenda</h2>
+        <p data-editor-meta>Usa la busqueda general para venir con un item especifico.</p>
+      </article>
+      <form class="form-card" data-editor-form>
+        <div class="field-group">
+          <div class="field"><label for="editor-code">Codigo</label><input id="editor-code" data-editor-code type="text"></div>
+          <div class="field"><label for="editor-category">Categoria</label><input id="editor-category" data-editor-category type="text"></div>
+          <div class="field"><label for="editor-price1">Precio 1</label><input id="editor-price1" data-editor-price1 type="number" min="0" step="0.01"></div>
+          <div class="field"><label for="editor-price2">Precio 2</label><input id="editor-price2" data-editor-price2 type="number" min="0" step="0.01"></div>
+          <div class="page-actions"><button class="btn btn-primary" type="submit">Guardar cambios</button><button class="btn btn-secondary" data-delete type="button">Eliminar</button></div>
+        </div>
+      </form>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <div class="site-footer-inner"><div><strong>Editor web</strong><br>Equivalente a `EditorDeItems`.</div><div>Edicion local en GitHub Pages.</div></div>
+  </footer>
+  <script src="assets/js/catalog-data.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>
