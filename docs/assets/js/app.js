@@ -82,7 +82,7 @@ function setActiveNav(pageType) {
 }
 
 function createCategoryCard(category) {
-  return `<a class="card" href="${category.page}"><div class="card-media"><img src="${category.image}" alt="${category.title}"></div><div class="card-copy"><h3>${category.title}</h3><p>${category.description}</p></div></a>`;
+  return `<a class="card" href="${category.page}"><div class="card-media"><img src="${category.image}" alt="${category.title}"></div><div class="card-copy"><h3>${category.title}</h3></div></a>`;
 }
 
 function createProductCard(item) {
