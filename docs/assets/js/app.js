@@ -86,7 +86,7 @@ function createCategoryCard(category) {
 }
 
 function createProductCard(item) {
-  return `<article class="catalog-item"><div class="catalog-item-figure"><img src="${item.image}" alt="${item.title}"><div class="catalog-code">COD ${item.code}</div></div><div class="catalog-meta"><span class="pill">${item.category}</span><span class="pill">${item.title}</span></div><div class="price-list"><div><strong>Precio 1:</strong> L ${item.price1}</div><div><strong>Precio 2:</strong> L ${item.price2}</div></div><div class="inline-actions"><a class="btn btn-secondary" href="editor-item.html?id=${encodeURIComponent(item.id)}">Editar</a><a class="btn btn-secondary" href="${item.image}" download="catalogo-${item.code}.jpg">Descargar</a></div></article>`;
+  return `<article class="catalog-item"><div class="catalog-item-figure"><img src="${item.image}" alt="${item.title}"><div class="catalog-code">COD ${item.code}</div></div><div class="catalog-meta"><span class="pill">${item.category}</span><span class="pill">${item.title}</span></div><div class="price-list"><div><strong>Precio 1:</strong> $ ${item.price1}</div><div><strong>Precio 2:</strong> $ ${item.price2}</div></div><div class="inline-actions"><a class="btn btn-secondary" href="${item.image}" download="catalogo-${item.code}.jpg">Descargar</a></div></article>`;
 }
 
 function renderCatalog(target, items) {
