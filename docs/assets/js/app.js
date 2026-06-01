@@ -112,13 +112,15 @@ function initHomePage(items) {
   if (featuredGrid) renderCatalog(featuredGrid, items.slice(0, 4));
 }
 
-function initCategoryPage(items, categoryName) {
+function initCategoryPage(items, categoryName, options = {}) {
   const input = document.querySelector("[data-search]");
   const grid = document.querySelector("[data-catalog-grid]");
   const count = document.querySelector("[data-results-count]");
   const info = getCategoryInfo(categoryName);
   const acceptedCategories = [categoryName, info?.firebasePath].filter(Boolean);
-  const baseItems = items.filter((item) => acceptedCategories.includes(item.category));
+  const baseItems = options.skipCategoryFilter
+    ? items
+    : items.filter((item) => acceptedCategories.includes(item.category));
   const update = () => {
     const query = input ? input.value.trim().toLowerCase() : "";
     const filtered = baseItems.filter((item) => item.code.toLowerCase().includes(query) || item.title.toLowerCase().includes(query) || buildSeo(item).includes(query));
@@ -151,7 +153,7 @@ async function hydrateCategoryPage(categoryName) {
   }
   try {
     const remoteItems = await loadRemoteCatalog(categoryName);
-    initCategoryPage(remoteItems, categoryName);
+    initCategoryPage(remoteItems, categoryName, { skipCategoryFilter: true });
   } catch (error) {
     initCategoryPage(getCatalog(), categoryName);
     setResultsText(count, `Mostrando datos locales de respaldo para ${categoryName}`);
