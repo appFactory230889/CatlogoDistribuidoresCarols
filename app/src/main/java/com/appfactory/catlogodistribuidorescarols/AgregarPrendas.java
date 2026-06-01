@@ -317,15 +317,12 @@ public class AgregarPrendas extends AppCompatActivity {
         datos.put("categoria", categoria);
         datos.put("seo", codigo + "_" + categoria);
 
-        mDatabase.child("CATALOGO")
-                .child("Todas las prendas")
-                .child(codigo)
-                .setValue(datos);
+        mDatabase.child("CATALOGO").child("Todas las prendas").child(codigo).setValue(datos);
 
-        mDatabase.child("CATALOGO")
-                .child(categoria)
-                .child(codigo)
-                .setValue(datos)
+        mDatabase.child("CATALOGO").child(categoria).child(codigo).setValue(datos);
+
+        mDatabase.child("CATALOGO").child("Junio").child(codigo).setValue(datos)
+
                 .addOnSuccessListener(aVoid -> {
 
                     progressBar.setVisibility(View.GONE);
@@ -350,16 +347,7 @@ public class AgregarPrendas extends AppCompatActivity {
 
     private void setSpinnerClasificacion() {
 
-        List<String> lista = Arrays.asList("",
-                "Verano",
-                "Conjuntos con Falda",
-                "Conjuntos con Pantalon",
-                "Enterizos",
-                "Faldas",
-                "Tops",
-                "Vestidos Cortos",
-                "Vestidos Largos",
-                "Otros Estilos");
+        List<String> lista = Arrays.asList("", "Conjuntos con Falda", "Conjuntos con Pantalon", "Enterizos", "Faldas", "Tops", "Vestidos Cortos", "Vestidos Largos", "Otros Estilos");
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(
                 this,

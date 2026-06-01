@@ -52,7 +52,7 @@ public class Temporada extends AppCompatActivity {
         searchBar = findViewById(R.id.searchBar);
         fabAgregarPrenda = findViewById(R.id.fabAgregarPrenda);
 
-        databaseReference = FirebaseDatabase.getInstance().getReference().child("CATALOGO").child("Verano");
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("CATALOGO").child("Junio");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @SuppressLint("NotifyDataSetChanged")
             @Override

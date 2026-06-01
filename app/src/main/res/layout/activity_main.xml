@@ -8,6 +8,7 @@
     android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     tools:context=".MainActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -60,7 +61,6 @@
                             android:layout_marginStart="15dp"
                             android:background="@drawable/borde_redondo"
                             android:text="Agregar Prenda"
-                            android:visibility="gone"
                             android:textColor="@color/white"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -110,14 +110,14 @@
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="170dp">
+                        android:layout_height="150dp">
 
 
                         <ImageView
                             android:id="@+id/imgTemporada"
                             android:clickable="true"
                             android:layout_width="match_parent"
-                            android:layout_height="170dp"
+                            android:layout_height="150dp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"

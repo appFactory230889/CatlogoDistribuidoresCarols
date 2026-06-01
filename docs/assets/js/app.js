@@ -51,8 +51,10 @@ async function fetchFirebasePath(path, fallbackCategory) {
 }
 
 async function loadRemoteCatalog(categoryName) {
-  const path = categoryName ? `CATALOGO/${encodeURIComponent(categoryName)}` : "CATALOGO/Todas%20las%20prendas";
-  const items = await fetchFirebasePath(path, categoryName || "");
+  const info = categoryName ? getCategoryInfo(categoryName) : null;
+  const remoteCategory = info?.firebasePath || categoryName;
+  const path = remoteCategory ? `CATALOGO/${encodeURIComponent(remoteCategory)}` : "CATALOGO/Todas%20las%20prendas";
+  const items = await fetchFirebasePath(path, remoteCategory || "");
   if (!items.length) {
     throw new Error("No llegaron prendas desde Firebase");
   }
@@ -115,7 +117,8 @@ function initCategoryPage(items, categoryName) {
   const grid = document.querySelector("[data-catalog-grid]");
   const count = document.querySelector("[data-results-count]");
   const info = getCategoryInfo(categoryName);
-  const baseItems = items.filter((item) => item.category === categoryName);
+  const acceptedCategories = [categoryName, info?.firebasePath].filter(Boolean);
+  const baseItems = items.filter((item) => acceptedCategories.includes(item.category));
   const update = () => {
     const query = input ? input.value.trim().toLowerCase() : "";
     const filtered = baseItems.filter((item) => item.code.toLowerCase().includes(query) || item.title.toLowerCase().includes(query) || buildSeo(item).includes(query));
