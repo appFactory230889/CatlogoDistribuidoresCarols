@@ -1,4 +1,3 @@
-
 package com.appfactory.catlogodistribuidorescarols;
 
 import android.content.Intent;

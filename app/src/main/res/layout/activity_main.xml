@@ -61,6 +61,7 @@
                             android:layout_marginStart="15dp"
                             android:background="@drawable/borde_redondo"
                             android:text="Agregar Prenda"
+                            android:visibility="gone"
                             android:textColor="@color/white"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
