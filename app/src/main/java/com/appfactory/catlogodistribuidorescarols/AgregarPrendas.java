@@ -321,7 +321,7 @@ public class AgregarPrendas extends AppCompatActivity {
 
         mDatabase.child("CATALOGO").child(categoria).child(codigo).setValue(datos);
 
-        mDatabase.child("CATALOGO").child("Junio").child(codigo).setValue(datos)
+        mDatabase.child("CATALOGO").child("Julio").child(codigo).setValue(datos)
 
                 .addOnSuccessListener(aVoid -> {
 

@@ -47,12 +47,12 @@ public class Temporada extends AppCompatActivity {
         recyclerPrendas.setLayoutManager(linearLayoutManager);
         catalogoModelList = new ArrayList<>();
         adapter = new catalogoAdapter(catalogoModelList);
-        recyclerPrendas.setAdapter(adapter);
+        recyclerPrendas.setAdapter(adapter);    
         mDatabase = FirebaseDatabase.getInstance().getReference();
         searchBar = findViewById(R.id.searchBar);
         fabAgregarPrenda = findViewById(R.id.fabAgregarPrenda);
 
-        databaseReference = FirebaseDatabase.getInstance().getReference().child("CATALOGO").child("Junio");
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("CATALOGO").child("Julio");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @SuppressLint("NotifyDataSetChanged")
             @Override
