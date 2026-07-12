@@ -1,0 +1,13 @@
+{
+  "name": "migrate-catalog-photos",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "One-time Firebase Storage migration for catalog photos",
+  "scripts": {
+    "migrate": "node migrate.js"
+  },
+  "dependencies": {
+    "firebase-admin": "^13.0.0"
+  }
+}
