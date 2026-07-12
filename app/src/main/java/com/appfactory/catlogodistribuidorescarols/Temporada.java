@@ -47,7 +47,7 @@ public class Temporada extends AppCompatActivity {
         recyclerPrendas.setLayoutManager(linearLayoutManager);
         catalogoModelList = new ArrayList<>();
         adapter = new catalogoAdapter(catalogoModelList);
-        recyclerPrendas.setAdapter(adapter);    
+        recyclerPrendas.setAdapter(adapter);
         mDatabase = FirebaseDatabase.getInstance().getReference();
         searchBar = findViewById(R.id.searchBar);
         fabAgregarPrenda = findViewById(R.id.fabAgregarPrenda);
