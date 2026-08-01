@@ -38,6 +38,15 @@ function normalizeItem(raw, fallbackCategory) {
   };
 }
 
+function encodeFirebasePath(path) {
+  return path
+    ? path
+        .split("/")
+        .map((segment) => encodeURIComponent(segment))
+        .join("/")
+    : "";
+}
+
 async function fetchFirebasePath(path, fallbackCategory) {
   const response = await fetch(`${FIREBASE_DB_URL}/${path}.json`);
   if (!response.ok) {
@@ -53,18 +62,25 @@ async function fetchFirebasePath(path, fallbackCategory) {
 async function loadRemoteCatalog(categoryName) {
   const info = categoryName ? getCategoryInfo(categoryName) : null;
   const remoteCategory = info?.firebasePath || categoryName;
-  const encodedRemotePath = remoteCategory
-    ? remoteCategory
-        .split("/")
-        .map((segment) => encodeURIComponent(segment))
-        .join("/")
-    : "";
+  const encodedRemotePath = encodeFirebasePath(remoteCategory);
   const path = encodedRemotePath ? `CATALOGO/${encodedRemotePath}` : "CATALOGO/Todas%20las%20prendas";
   const items = await fetchFirebasePath(path, remoteCategory || "");
   if (!items.length) {
     throw new Error("No llegaron prendas desde Firebase");
   }
   return items;
+}
+
+async function fetchSeasonList() {
+  const response = await fetch(`${FIREBASE_DB_URL}/CATALOGO/${encodeFirebasePath("Listado Temporadas")}.json`);
+  if (!response.ok) {
+    throw new Error(`Firebase respondio con ${response.status}`);
+  }
+  const data = await response.json();
+  if (!data || typeof data !== "object") return [];
+  return Object.values(data)
+    .map((item) => String(item?.referencia || "").trim())
+    .filter(Boolean);
 }
 
 function getCategoryInfo(categoryName) {
@@ -133,7 +149,7 @@ function initCategoryPage(items, categoryName, options = {}) {
     if (count) count.textContent = `${filtered.length} prenda${filtered.length === 1 ? "" : "s"} en ${info ? info.title : categoryName}`;
     renderCatalog(grid, filtered);
   };
-  if (input) input.addEventListener("input", update);
+  if (input) input.oninput = update;
   update();
 }
 
@@ -147,23 +163,65 @@ function initSearchPage(items) {
     if (count) count.textContent = `${filtered.length} resultado${filtered.length === 1 ? "" : "s"} encontrados`;
     renderCatalog(grid, filtered);
   };
-  if (input) input.addEventListener("input", update);
+  if (input) input.oninput = update;
   update();
 }
 
 async function hydrateCategoryPage(categoryName) {
   const grid = document.querySelector("[data-catalog-grid]");
   const count = document.querySelector("[data-results-count]");
-  if (grid) {
-    grid.innerHTML = `<div class="empty-state"><h3>Cargando prendas...</h3><p>Estamos consultando la categoria en Firebase.</p></div>`;
+  const seasonPicker = document.querySelector("[data-season-picker]");
+  const seasonTitle = document.querySelector("[data-season-title]");
+
+  const updateSeasonUi = (seasonName) => {
+    if (seasonTitle) {
+      seasonTitle.textContent = seasonName ? `Nuevos Diseños para ${seasonName}` : "Nuevos Diseños";
+    }
+    document.title = seasonName ? `Nuevos Diseños para ${seasonName} | Catalogo Carol's` : "Catalogo Carol's";
+    document.body.dataset.category = seasonName;
+  };
+
+  const renderSeason = async (seasonName) => {
+    if (!seasonName) {
+      updateSeasonUi("");
+      if (grid) {
+        grid.innerHTML = `<div class="empty-state"><h3>Selecciona una temporada</h3><p>Elige una opcion del selector para ver sus prendas.</p></div>`;
+      }
+      setResultsText(count, "");
+      return;
+    }
+
+    updateSeasonUi(seasonName);
+    if (grid) {
+      grid.innerHTML = `<div class="empty-state"><h3>Cargando prendas...</h3><p>Estamos consultando la temporada en Firebase.</p></div>`;
+    }
+
+    try {
+      const remoteItems = await loadRemoteCatalog(seasonName);
+      initCategoryPage(remoteItems, seasonName, { skipCategoryFilter: true });
+    } catch (error) {
+      initCategoryPage(getCatalog(), seasonName);
+      setResultsText(count, `Mostrando datos locales de respaldo para ${seasonName}`);
+    }
+  };
+
+  if (seasonPicker) {
+    try {
+      const seasons = await fetchSeasonList();
+      seasonPicker.innerHTML = [`<option value=""></option>`]
+        .concat(seasons.map((season) => `<option value="${season}">${season}</option>`))
+        .join("");
+      seasonPicker.value = categoryName;
+      seasonPicker.onchange = async () => {
+        await renderSeason(seasonPicker.value.trim());
+      };
+    } catch (error) {
+      seasonPicker.innerHTML = `<option value="${categoryName}">${categoryName}</option>`;
+      seasonPicker.value = categoryName;
+    }
   }
-  try {
-    const remoteItems = await loadRemoteCatalog(categoryName);
-    initCategoryPage(remoteItems, categoryName, { skipCategoryFilter: true });
-  } catch (error) {
-    initCategoryPage(getCatalog(), categoryName);
-    setResultsText(count, `Mostrando datos locales de respaldo para ${categoryName}`);
-  }
+
+  await renderSeason(categoryName);
 }
 
 async function hydrateSearchPage() {
