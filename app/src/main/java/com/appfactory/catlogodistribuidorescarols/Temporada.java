@@ -4,7 +4,12 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.SearchView;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -25,21 +30,30 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Temporada extends AppCompatActivity {
     SearchView searchBar;
     FloatingActionButton fabAgregarPrenda;
+    Spinner spinnerTemporadas;
+
+    List<String> periodos;
+    ArrayAdapter<String> adapterPeriodos;
 
     RecyclerView recyclerPrendas;
+    private ValueEventListener registrosListener;
     DatabaseReference databaseReference;
     ArrayList<catalogoModel> catalogoModelList;
     catalogoAdapter adapter;
     LinearLayoutManager linearLayoutManager;
     DatabaseReference mDatabase;
 
+    String periodo;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_temporada);
 
         recyclerPrendas = findViewById(R.id.recyclerPrendas);
@@ -51,8 +65,52 @@ public class Temporada extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance().getReference();
         searchBar = findViewById(R.id.searchBar);
         fabAgregarPrenda = findViewById(R.id.fabAgregarPrenda);
+        spinnerTemporadas = findViewById(R.id.spinnerTemporadas);
 
-        databaseReference = FirebaseDatabase.getInstance().getReference().child("CATALOGO").child("Julio");
+        periodos = new ArrayList<>();
+        adapterPeriodos = new ArrayAdapter<>(Temporada.this, android.R.layout.simple_spinner_dropdown_item, periodos);
+        spinnerTemporadas.setAdapter(adapterPeriodos);
+
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("CATALOGO").child("Listado Temporadas");
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                periodos.clear(); // Limpiar antes de volver a llenar
+                periodos.add("");
+                for (DataSnapshot data : snapshot.getChildren()) {
+                    String periodo = data.child("referencia").getValue(String.class);
+                    if (periodo != null && !periodo.trim().isEmpty()) {
+                        periodos.add(periodo);
+                    }
+                }
+                adapterPeriodos.notifyDataSetChanged(); // Refrescar el spinner
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(Temporada.this, "Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        spinnerTemporadas.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                periodo = parent.getItemAtPosition(position).toString();
+                if (periodo.trim().isEmpty()) {
+                    catalogoModelList.clear();
+                    adapter.notifyDataSetChanged();
+                    return;
+                }
+                cargarRegistros();
+                /*establecerFechaHora();*/
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
+        /*databaseReference = FirebaseDatabase.getInstance().getReference().child("CATALOGO").child("Julio");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @SuppressLint("NotifyDataSetChanged")
             @Override
@@ -69,7 +127,7 @@ public class Temporada extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
-        });
+        });*/
 
 
         fabAgregarPrenda.setOnClickListener(v -> {
@@ -97,6 +155,51 @@ public class Temporada extends AppCompatActivity {
 
     }
     /// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    private void cargarRegistros() {
+
+        if (periodo == null || periodo.isEmpty()) {
+            return;
+        }
+
+        // Elimina el listener anterior
+        if (databaseReference != null && registrosListener != null) {
+            databaseReference.removeEventListener(registrosListener);
+        }
+
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("CATALOGO").child("Temporadas").child(periodo);
+
+        registrosListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                catalogoModelList.clear();
+
+                if (snapshot.exists()) {
+
+                    for (DataSnapshot data : snapshot.getChildren()) {
+
+                        catalogoModel modelo = data.getValue(catalogoModel.class);
+
+                        if (modelo != null) {
+                            catalogoModelList.add(modelo);
+                        }
+                    }
+                }
+
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(Temporada.this,
+                        error.getMessage(),
+                        Toast.LENGTH_SHORT).show();
+            }
+        };
+
+        databaseReference.addValueEventListener(registrosListener);
+    }
 
     private void buscar(String s) {
         ArrayList<catalogoModel>milista = new ArrayList<>();

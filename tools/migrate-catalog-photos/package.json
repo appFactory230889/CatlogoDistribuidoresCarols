@@ -5,7 +5,9 @@
   "type": "module",
   "description": "One-time Firebase Storage migration for catalog photos",
   "scripts": {
-    "migrate": "node migrate.js"
+    "migrate": "node migrate.js",
+    "add-temporada": "node add-temporada.js",
+    "copy-temporada-node": "node copy-temporada-node.js"
   },
   "dependencies": {
     "firebase-admin": "^13.0.0"

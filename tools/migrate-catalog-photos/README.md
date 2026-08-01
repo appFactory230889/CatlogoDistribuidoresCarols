@@ -41,12 +41,49 @@ $env:FIREBASE_SERVICE_ACCOUNT="C:\ruta\service-account.json"
 npm run migrate
 ```
 
-## Ejecutar y guardar la nueva URL en la base de datos
+## Agregar una temporada al listado
+
+```bash
+$env:FIREBASE_SERVICE_ACCOUNT="C:\ruta\service-account.json"
+npm run add-temporada -- "Julio 2026"
+```
+
+Esto crea un nodo nuevo en:
+
+- `CATALOGO/Listado Temporadas/<auto-id>/referencia`
+
+## Copiar un nodo completo a Temporadas
+
+```bash
+$env:FIREBASE_SERVICE_ACCOUNT="C:\ruta\service-account.json"
+npm run copy-temporada-node -- "Julio" "Julio 2026"
+```
+
+Esto copia todo lo que exista en:
+
+- `CATALOGO/Julio`
+
+hacia:
+
+- `CATALOGO/Temporadas/Julio 2026`
+
+No borra ni mueve el nodo original.
+
+## Ejecutar y reescribir la URL en la base de datos
 
 ```bash
 $env:FIREBASE_SERVICE_ACCOUNT="C:\ruta\service-account.json"
 npm run migrate -- --update-db
 ```
+
+Con `--update-db`, el script:
+
+- conserva la URL vieja en `fotoOriginal`
+- guarda la nueva URL en `fotoCatalogo`
+- reemplaza `foto` por la nueva URL
+- actualiza `Todas las prendas` y cualquier nodo duplicado del mismo codigo dentro de `CATALOGO`
+
+Esto tambien funciona si las fotos ya fueron copiadas antes: no necesita volver a duplicarlas para reescribir las URLs.
 
 ## Nota importante
 

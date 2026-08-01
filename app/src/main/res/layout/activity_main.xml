@@ -58,13 +58,15 @@
                             android:id="@+id/btnAgregarPrenda"
                             android:layout_width="wrap_content"
                             android:layout_height="40dp"
-                            android:layout_marginStart="15dp"
+                            android:layout_marginStart="16dp"
                             android:background="@drawable/borde_redondo"
                             android:text="Agregar Prenda"
+                            android:visibility="gone"
                             android:textColor="@color/white"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="0.533" />
 
                         <Button
                             android:id="@+id/btnBusqueda"
@@ -110,25 +112,21 @@
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="150dp">
+                        android:layout_height="100dp"
+                        android:layout_margin="8dp"
+                        android:background="@drawable/borde_redondo_white"
+                        android:elevation="5dp">
 
 
                         <ImageView
                             android:id="@+id/imgTemporada"
                             android:clickable="true"
                             android:layout_width="match_parent"
-                            android:layout_height="150dp"
+                            android:layout_height="100dp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             app:srcCompat="@drawable/temporada" />
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:background="@color/black"
-                            app:layout_constraintBottom_toBottomOf="@+id/imgTemporada" />
-
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -142,6 +140,12 @@
                             android:id="@+id/conjuntosConFalda"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:background="@drawable/borde_redondo_white"
+                            android:elevation="5dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginTop="5dp"
                             android:layout_weight="0.5"
                             android:clickable="true">
 
@@ -180,6 +184,12 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="0.5"
+                            android:background="@drawable/borde_redondo_white"
+                            android:elevation="5dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginTop="5dp"
                             android:clickable="true">
 
                             <RelativeLayout
@@ -222,6 +232,12 @@
 
                         <RelativeLayout
                             android:id="@+id/enterizos"
+                            android:background="@drawable/borde_redondo_white"
+                            android:elevation="5dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginTop="5dp"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="0.5"
@@ -262,6 +278,12 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="0.5"
+                            android:background="@drawable/borde_redondo_white"
+                            android:elevation="5dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginTop="5dp"
                             android:clickable="true">
 
                             <RelativeLayout
@@ -306,6 +328,12 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="0.5"
+                            android:background="@drawable/borde_redondo_white"
+                            android:elevation="5dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginTop="5dp"
                             android:clickable="true">
 
                             <RelativeLayout
@@ -343,6 +371,12 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="0.5"
+                            android:background="@drawable/borde_redondo_white"
+                            android:elevation="5dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginTop="5dp"
                             android:clickable="true">
 
                             <RelativeLayout
@@ -387,6 +421,12 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="0.5"
+                            android:background="@drawable/borde_redondo_white"
+                            android:elevation="5dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginTop="5dp"
                             android:clickable="true">
 
                             <RelativeLayout
@@ -424,6 +464,12 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="0.5"
+                            android:background="@drawable/borde_redondo_white"
+                            android:elevation="5dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginTop="5dp"
                             android:clickable="true">
 
                             <RelativeLayout

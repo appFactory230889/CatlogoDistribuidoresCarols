@@ -40,6 +40,7 @@ public class vestidosCortos extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_vestidos_cortos);
 
         recyclerPrendas = findViewById(R.id.recyclerPrendas);

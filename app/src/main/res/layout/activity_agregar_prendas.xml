@@ -50,13 +50,15 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ScrollView
+        android:id="@+id/scrollAgregarPrendas"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:orientation="vertical"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
     <!-- Botón cerrar pedido (oculto al inicio) -->
     <Button
@@ -150,6 +152,8 @@
         android:layout_height="wrap_content"
         android:hint="Precio 1 (tallas de XXS-L)"
         android:layout_marginTop="10dp"
+        android:imeOptions="actionNext"
+        android:nextFocusDown="@id/edtPrecio2"
         android:inputType="numberDecimal" />
 
             <TextView
@@ -165,6 +169,7 @@
                 android:layout_height="wrap_content"
                 android:hint="Precio 2 (tallas XL-XXL)"
                 android:layout_marginTop="10dp"
+                android:imeOptions="actionDone"
                 android:inputType="numberDecimal" />
 
     <Button

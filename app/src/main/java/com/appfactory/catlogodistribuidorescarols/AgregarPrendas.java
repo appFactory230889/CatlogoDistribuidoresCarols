@@ -16,6 +16,7 @@ import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.os.VibratorManager;
 import android.provider.MediaStore;
+import android.view.WindowManager;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
@@ -26,10 +27,12 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.EdgeToEdge;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
@@ -50,9 +53,13 @@ import com.yalantis.ucrop.UCrop;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 
@@ -65,6 +72,7 @@ public class AgregarPrendas extends AppCompatActivity {
     Button btnAgregarPrenda, btnFotoPrenda, btnFinalizar;
     FrameLayout frameCaptura;
     ProgressBar progressBar;
+    ScrollView scrollAgregarPrendas;
 
     Bitmap thumb_bitmap = null;
     Bitmap imagenCapturada = null;
@@ -76,9 +84,18 @@ public class AgregarPrendas extends AppCompatActivity {
 
     ActivityResultLauncher<String> mGetContent;
 
+    Calendar calendar = Calendar.getInstance();
+    int year = calendar.get(Calendar.YEAR);
+    int month = calendar.get(Calendar.MONTH);
+    int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+    String periodo, hora, fecha;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         setContentView(R.layout.activity_agregar_prendas);
 
         // 🔹 UI
@@ -93,6 +110,7 @@ public class AgregarPrendas extends AppCompatActivity {
         btnFinalizar = findViewById(R.id.btnFinalizar);
         frameCaptura = findViewById(R.id.frameCaptura);
         progressBar = findViewById(R.id.progressBar);
+        scrollAgregarPrendas = findViewById(R.id.scrollAgregarPrendas);
         tvAlertaPrecio1 = findViewById(R.id.tvAlertaPrecio1);
         tvAlertaPrecio2 = findViewById(R.id.tvAlertaPrecio2);
         tvClasificacion = findViewById(R.id.tvClasificacion);
@@ -100,14 +118,14 @@ public class AgregarPrendas extends AppCompatActivity {
         tvAlertaClasificacion.setVisibility(View.GONE);
         tvAlertaPrecio1.setVisibility(View.GONE);
         tvAlertaPrecio2.setVisibility(View.GONE);
-
-
         btnAgregarPrenda.setVisibility(View.GONE);
         btnFinalizar.setVisibility(View.GONE);
 
+        establecerFechaHora();
+
         // 🔹 Firebase
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        storageReference = FirebaseStorage.getInstance().getReference().child("Fotos Subidas");
+        storageReference = FirebaseStorage.getInstance().getReference();
 
         setSpinnerClasificacion();
 
@@ -124,9 +142,44 @@ public class AgregarPrendas extends AppCompatActivity {
         btnFotoPrenda.setOnClickListener(v -> mGetContent.launch("image/*"));
 
         btnAgregarPrenda.setOnClickListener(v -> validarYGuardar());
+
+        configurarScrollConTeclado();
     }
 
     ////////////////////////////////////////////////////////////Hasta Aqui el OnCreate//////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    private void establecerFechaHora() {
+
+        String mesFormateado = String.format(Locale.getDefault(), "%02d", month + 1);
+        String nombreMes;
+
+        if ("01".equals(mesFormateado)) {
+            nombreMes = "Enero";
+        } else if ("02".equals(mesFormateado)) {
+            nombreMes = "Febrero";
+        } else if ("03".equals(mesFormateado)) {
+            nombreMes = "Marzo";
+        } else if ("04".equals(mesFormateado)) {
+            nombreMes = "Abril";
+        } else if ("05".equals(mesFormateado)) {
+            nombreMes = "Mayo";
+        } else if ("06".equals(mesFormateado)) {
+            nombreMes = "Junio";
+        } else if ("07".equals(mesFormateado)) {
+            nombreMes = "Julio";
+        } else if ("08".equals(mesFormateado)) {
+            nombreMes = "Agosto";
+        } else if ("09".equals(mesFormateado)) {
+            nombreMes = "Septiembre";
+        } else if ("10".equals(mesFormateado)) {
+            nombreMes = "Octubre";
+        } else if ("11".equals(mesFormateado)) {
+            nombreMes = "Noviembre";
+        } else {
+            nombreMes = "Diciembre";
+        }
+        periodo = nombreMes + " " + year;
+    }
 
     private void vibrarTelefono() {
         Context context = AgregarPrendas.this; // 👈 este es el context correcto en un Fragment
@@ -143,6 +196,25 @@ public class AgregarPrendas extends AppCompatActivity {
                 vibrator.vibrate(500); // para dispositivos antiguos
             }
         }
+    }
+
+    private void configurarScrollConTeclado() {
+        View.OnFocusChangeListener focusListener = (view, hasFocus) -> {
+            if (hasFocus && scrollAgregarPrendas != null) {
+                scrollAgregarPrendas.postDelayed(() -> scrollAgregarPrendas.smoothScrollTo(0, Math.max(0, view.getTop() - 180)), 300);
+            }
+        };
+
+        View.OnClickListener clickListener = view -> {
+            if (scrollAgregarPrendas != null) {
+                scrollAgregarPrendas.postDelayed(() -> scrollAgregarPrendas.smoothScrollTo(0, Math.max(0, view.getTop() - 180)), 300);
+            }
+        };
+
+        edtPrecio1.setOnFocusChangeListener(focusListener);
+        edtPrecio2.setOnFocusChangeListener(focusListener);
+        edtPrecio1.setOnClickListener(clickListener);
+        edtPrecio2.setOnClickListener(clickListener);
     }
 
     private void parpadearVista(View view) {
@@ -279,8 +351,20 @@ public class AgregarPrendas extends AppCompatActivity {
         imagenCapturada.compress(Bitmap.CompressFormat.JPEG, 90, baos);
         byte[] data = baos.toByteArray();
 
-        String nombre = "captura_" + System.currentTimeMillis() + ".jpg";
-        StorageReference ref = storageReference.child(nombre);
+        String categoriaNormalizada = categoria == null
+                ? "Sin categoria"
+                : categoria.replace(".", "")
+                .replace("#", "")
+                .replace("$", "")
+                .replace("[", "")
+                .replace("]", "")
+                .trim();
+
+        String nombre = codigo + ".jpg";
+        StorageReference ref = storageReference
+                .child("Fotos de Catalogo")
+                .child(categoriaNormalizada)
+                .child(nombre);
 
         ref.putBytes(data)
                 .continueWithTask(task -> ref.getDownloadUrl())
@@ -321,7 +405,11 @@ public class AgregarPrendas extends AppCompatActivity {
 
         mDatabase.child("CATALOGO").child(categoria).child(codigo).setValue(datos);
 
-        mDatabase.child("CATALOGO").child("Julio").child(codigo).setValue(datos)
+        mDatabase.child("CATALOGO").child("Temporadas").child(periodo).child(codigo).setValue(datos);
+
+        Map<String, Object> temporadas = new HashMap<>();
+        temporadas.put("referencia", periodo);
+        mDatabase.child("CATALOGO").child("Listado Temporadas").push().setValue(temporadas)
 
                 .addOnSuccessListener(aVoid -> {
 

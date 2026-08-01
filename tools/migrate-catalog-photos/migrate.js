@@ -34,6 +34,10 @@ function buildDestinationPath(item) {
   return `Fotos de Catalogo/${category}/${code}.jpg`;
 }
 
+function buildPublicUrl(destination) {
+  return `https://storage.googleapis.com/${bucket.name}/${encodeURIComponent(destination).replace(/%2F/g, "/")}`;
+}
+
 async function downloadBytes(url) {
   const response = await fetch(url);
   if (!response.ok) {
@@ -49,14 +53,15 @@ async function uploadCopy(item, dryRun = false) {
 
   const destination = buildDestinationPath(item);
   const file = bucket.file(destination);
+  const publicUrl = buildPublicUrl(destination);
 
   const [exists] = await file.exists();
   if (exists) {
-    return { skipped: true, reason: "already exists", destination };
+    return { skipped: true, reason: "already exists", destination, publicUrl };
   }
 
   if (dryRun) {
-    return { copied: false, dryRun: true, destination };
+    return { copied: false, dryRun: true, destination, publicUrl };
   }
 
   const bytes = await downloadBytes(item.foto);
@@ -72,8 +77,39 @@ async function uploadCopy(item, dryRun = false) {
 
   await file.makePublic().catch(() => {});
 
-  const publicUrl = `https://storage.googleapis.com/${bucket.name}/${encodeURIComponent(destination).replace(/%2F/g, "/")}`;
   return { copied: true, destination, publicUrl };
+}
+
+async function updateItemUrls(item, newUrl) {
+  const codigo = String(item?.codigo || "").trim();
+  if (!codigo) return;
+
+  const catalogoSnapshot = await db.ref("CATALOGO").get();
+  if (!catalogoSnapshot.exists()) return;
+
+  const catalogo = catalogoSnapshot.val() || {};
+  const updates = {};
+
+  const rewrittenFields = {
+    fotoOriginal: item.foto || "",
+    fotoCatalogo: newUrl,
+    foto: newUrl
+  };
+
+  updates[`CATALOGO/Todas las prendas/${codigo}/fotoOriginal`] = rewrittenFields.fotoOriginal;
+  updates[`CATALOGO/Todas las prendas/${codigo}/fotoCatalogo`] = rewrittenFields.fotoCatalogo;
+  updates[`CATALOGO/Todas las prendas/${codigo}/foto`] = rewrittenFields.foto;
+
+  for (const [nodeName, nodeValue] of Object.entries(catalogo)) {
+    if (nodeName === "Codigo" || !nodeValue || typeof nodeValue !== "object") continue;
+    if (!Object.prototype.hasOwnProperty.call(nodeValue, codigo)) continue;
+
+    updates[`CATALOGO/${nodeName}/${codigo}/fotoOriginal`] = rewrittenFields.fotoOriginal;
+    updates[`CATALOGO/${nodeName}/${codigo}/fotoCatalogo`] = rewrittenFields.fotoCatalogo;
+    updates[`CATALOGO/${nodeName}/${codigo}/foto`] = rewrittenFields.foto;
+  }
+
+  await db.ref().update(updates);
 }
 
 async function run() {
@@ -96,6 +132,11 @@ async function run() {
       if (result.skipped) {
         skipped += 1;
         console.log(`SKIP ${item.codigo}: ${result.reason}`);
+
+        if (updateDatabase && result.publicUrl && !dryRun) {
+          await updateItemUrls(item, result.publicUrl);
+          console.log(`UPDATE ${item.codigo}: foto -> ${result.publicUrl}`);
+        }
         continue;
       }
 
@@ -108,15 +149,8 @@ async function run() {
       console.log(`COPY ${item.codigo}: ${result.destination}`);
 
       if (updateDatabase && result.publicUrl) {
-        const updates = {
-          fotoCatalogo: result.publicUrl
-        };
-
-        await db.ref(`CATALOGO/Todas las prendas/${item.codigo}`).update(updates);
-
-        if (item.categoria) {
-          await db.ref(`CATALOGO/${item.categoria}/${item.codigo}`).update(updates);
-        }
+        await updateItemUrls(item, result.publicUrl);
+        console.log(`UPDATE ${item.codigo}: foto -> ${result.publicUrl}`);
       }
     } catch (error) {
       failed += 1;
