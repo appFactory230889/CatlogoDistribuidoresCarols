@@ -59,12 +59,13 @@ async function fetchFirebasePath(path, fallbackCategory) {
     .filter(Boolean);
 }
 
-async function loadRemoteCatalog(categoryName) {
+async function loadRemoteCatalog(categoryName, options = {}) {
   const info = categoryName ? getCategoryInfo(categoryName) : null;
-  const remoteCategory = info?.firebasePath || categoryName;
+  const remoteCategory = options.remotePath || info?.firebasePath || categoryName;
+  const fallbackCategory = options.fallbackCategory || categoryName || remoteCategory;
   const encodedRemotePath = encodeFirebasePath(remoteCategory);
   const path = encodedRemotePath ? `CATALOGO/${encodedRemotePath}` : "CATALOGO/Todas%20las%20prendas";
-  const items = await fetchFirebasePath(path, remoteCategory || "");
+  const items = await fetchFirebasePath(path, fallbackCategory || "");
   if (!items.length) {
     throw new Error("No llegaron prendas desde Firebase");
   }
@@ -197,7 +198,10 @@ async function hydrateCategoryPage(categoryName) {
     }
 
     try {
-      const remoteItems = await loadRemoteCatalog(seasonName);
+      const remoteItems = await loadRemoteCatalog(seasonName, {
+        remotePath: `Temporadas/${seasonName}`,
+        fallbackCategory: seasonName
+      });
       initCategoryPage(remoteItems, seasonName, { skipCategoryFilter: true });
     } catch (error) {
       initCategoryPage(getCatalog(), seasonName);
