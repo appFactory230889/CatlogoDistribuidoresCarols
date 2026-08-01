@@ -53,7 +53,13 @@ async function fetchFirebasePath(path, fallbackCategory) {
 async function loadRemoteCatalog(categoryName) {
   const info = categoryName ? getCategoryInfo(categoryName) : null;
   const remoteCategory = info?.firebasePath || categoryName;
-  const path = remoteCategory ? `CATALOGO/${encodeURIComponent(remoteCategory)}` : "CATALOGO/Todas%20las%20prendas";
+  const encodedRemotePath = remoteCategory
+    ? remoteCategory
+        .split("/")
+        .map((segment) => encodeURIComponent(segment))
+        .join("/")
+    : "";
+  const path = encodedRemotePath ? `CATALOGO/${encodedRemotePath}` : "CATALOGO/Todas%20las%20prendas";
   const items = await fetchFirebasePath(path, remoteCategory || "");
   if (!items.length) {
     throw new Error("No llegaron prendas desde Firebase");
@@ -117,7 +123,7 @@ function initCategoryPage(items, categoryName, options = {}) {
   const grid = document.querySelector("[data-catalog-grid]");
   const count = document.querySelector("[data-results-count]");
   const info = getCategoryInfo(categoryName);
-  const acceptedCategories = [categoryName, info?.firebasePath].filter(Boolean);
+  const acceptedCategories = [categoryName, info?.firebasePath, "Verano", "Julio"].filter(Boolean);
   const baseItems = options.skipCategoryFilter
     ? items
     : items.filter((item) => acceptedCategories.includes(item.category));

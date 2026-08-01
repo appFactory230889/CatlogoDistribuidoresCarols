@@ -1,5 +1,5 @@
 const CATEGORY_INFO = [
-  { id: "verano", title: "Nuevos Diseños para Julio", category: "Verano", firebasePath: "Julio", page: "temporada.html", image: "assets/img/temporada.jpg", description: "Seleccion destacada para la temporada actual." },
+  { id: "temporada-julio-2026", title: "Nuevos Dise\u00f1os para Julio", category: "Julio 2026", firebasePath: "Temporadas/Julio 2026", page: "temporada.html", image: "assets/img/temporada-julio.jpg", description: "Seleccion destacada para la temporada actual." },
   { id: "conjuntos-falda", title: "Conjuntos con Falda", category: "Conjuntos con Falda", page: "conjuntos-falda.html", image: "assets/img/conjuntosconfalda.png", description: "Looks coordinados pensados para venta inmediata." },
   { id: "conjuntos-pantalon", title: "Conjuntos con Pantalon", category: "Conjuntos con Pantalon", page: "conjuntos-pantalon.html", image: "assets/img/conjuntoconpantalon.png", description: "Sets versatiles con caida estructurada y comoda." },
   { id: "enterizos", title: "Enterizos", category: "Enterizos", page: "enterizos.html", image: "assets/img/enterizos.png", description: "Prendas protagonistas para catalogo y redes." },
@@ -11,7 +11,7 @@ const CATEGORY_INFO = [
 ];
 
 const SEED_ITEMS = [
-  { id: "1001", code: "1001", title: "Look Verano 1001", category: "Verano", price1: "450", price2: "520", image: "assets/img/temporada.jpg" },
+  { id: "1001", code: "1001", title: "Look Julio 1001", category: "Julio 2026", price1: "450", price2: "520", image: "assets/img/temporada-julio.jpg" },
   { id: "1101", code: "1101", title: "Conjunto Falda 1101", category: "Conjuntos con Falda", price1: "490", price2: "560", image: "assets/img/conjuntosconfalda.png" },
   { id: "1201", code: "1201", title: "Conjunto Pantalon 1201", category: "Conjuntos con Pantalon", price1: "520", price2: "590", image: "assets/img/conjuntoconpantalon.png" },
   { id: "1301", code: "1301", title: "Enterizo 1301", category: "Enterizos", price1: "580", price2: "650", image: "assets/img/enterizos.png" },
