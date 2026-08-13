@@ -174,6 +174,20 @@ async function hydrateCategoryPage(categoryName) {
   const seasonPicker = document.querySelector("[data-season-picker]");
   const seasonTitle = document.querySelector("[data-season-title]");
 
+  if (!seasonPicker) {
+    if (grid) {
+      grid.innerHTML = `<div class="empty-state"><h3>Cargando prendas...</h3><p>Estamos consultando la categoria en Firebase.</p></div>`;
+    }
+    try {
+      const remoteItems = await loadRemoteCatalog(categoryName);
+      initCategoryPage(remoteItems, categoryName, { skipCategoryFilter: true });
+    } catch (error) {
+      initCategoryPage(getCatalog(), categoryName);
+      setResultsText(count, `Mostrando datos locales de respaldo para ${categoryName}`);
+    }
+    return;
+  }
+
   const updateSeasonUi = (seasonName) => {
     if (seasonTitle) {
       seasonTitle.textContent = seasonName ? `Nuevos Diseños para ${seasonName}` : "Nuevos Diseños";
