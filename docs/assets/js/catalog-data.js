@@ -1,5 +1,5 @@
 const CATEGORY_INFO = [
-  { id: "temporada-julio-2026", title: "Nuevos Dise\u00f1os para Julio", category: "Julio 2026", firebasePath: "Temporadas/Julio 2026", page: "temporada.html", image: "assets/img/temporada-julio.jpg", description: "Seleccion destacada para la temporada actual." },
+  { id: "temporada-julio-2026", title: "Nuevos Dise\u00f1os de Temporada", category: "Julio 2026", firebasePath: "Temporadas/Julio 2026", page: "temporada.html", image: "assets/img/temporada-julio.jpg", description: "Seleccion destacada para la temporada actual." },
   { id: "conjuntos-falda", title: "Conjuntos con Falda", category: "Conjuntos con Falda", page: "conjuntos-falda.html", image: "assets/img/conjuntosconfalda.png", description: "Looks coordinados pensados para venta inmediata." },
   { id: "conjuntos-pantalon", title: "Conjuntos con Pantalon", category: "Conjuntos con Pantalon", page: "conjuntos-pantalon.html", image: "assets/img/conjuntoconpantalon.png", description: "Sets versatiles con caida estructurada y comoda." },
   { id: "enterizos", title: "Enterizos", category: "Enterizos", page: "enterizos.html", image: "assets/img/enterizos.png", description: "Prendas protagonistas para catalogo y redes." },

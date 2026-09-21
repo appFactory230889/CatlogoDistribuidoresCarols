@@ -190,9 +190,9 @@ async function hydrateCategoryPage(categoryName) {
 
   const updateSeasonUi = (seasonName) => {
     if (seasonTitle) {
-      seasonTitle.textContent = seasonName ? `Nuevos Diseños para ${seasonName}` : "Nuevos Diseños";
+      seasonTitle.textContent = "Nuevos Diseños de Temporada";
     }
-    document.title = seasonName ? `Nuevos Diseños para ${seasonName} | Catalogo Carol's` : "Catalogo Carol's";
+    document.title = "Nuevos Diseños de Temporada | Catalogo Carol's";
     document.body.dataset.category = seasonName;
   };
 
