@@ -475,11 +475,12 @@ h1, h2, h3, p {
 
 .site-footer-inner:has(> div:only-child) {
   justify-content: center;
+  align-items: center;
   text-align: center;
 }
 
 .footer-logo {
-  height: 5px;
+  height: 12px;
   width: auto;
   display: inline-block;
 }
