@@ -60,7 +60,6 @@
         android:layout_height="30dp"
         android:background="@drawable/borde_redondo"
         android:text="Editar"
-        android:visibility="gone"
         android:layout_marginRight="5dp"
         android:layout_marginTop="5dp"
         android:textColor="@color/white"

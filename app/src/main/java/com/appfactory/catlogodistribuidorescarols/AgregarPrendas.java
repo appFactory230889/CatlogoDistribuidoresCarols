@@ -405,29 +405,23 @@ public class AgregarPrendas extends AppCompatActivity {
 
         mDatabase.child("CATALOGO").child(categoria).child(codigo).setValue(datos);
 
-        mDatabase.child("CATALOGO").child("Temporadas").child(periodo).child(codigo).setValue(datos);
+        /*mDatabase.child("CATALOGO").child("Temporadas").child(periodo).child(codigo).setValue(datos);*/
+        mDatabase.child("CATALOGO").child("Temporadas").child("Graduaciones 2026").child(codigo).setValue(datos)
 
-        Map<String, Object> temporadas = new HashMap<>();
+        /*Map<String, Object> temporadas = new HashMap<>();
         temporadas.put("referencia", periodo);
-        mDatabase.child("CATALOGO").child("Listado Temporadas").push().setValue(temporadas)
-
+        mDatabase.child("CATALOGO").child("Listado Temporadas").push().setValue(temporadas)*/
                 .addOnSuccessListener(aVoid -> {
-
                     progressBar.setVisibility(View.GONE);
-
                     imgFotoPrenda.setImageResource(R.drawable.logo);
                     edtPrecio1.setText("");
                     edtPrecio2.setText("");
                     tvCodigo.setText("");
                     txtNumeroBorde.setText("");
                     spinnerClasificacion.setSelection(0);
-
                     btnFinalizar.setVisibility(View.VISIBLE);
                     btnAgregarPrenda.setVisibility(View.GONE);
-
-                    Toast.makeText(this,
-                            "Añadido al catálogo con éxito",
-                            Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Añadido al catálogo con éxito", Toast.LENGTH_SHORT).show();
                 });
     }
 
