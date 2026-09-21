@@ -88,10 +88,9 @@ h1, h2, h3, p {
 }
 
 .brand-logo {
-  width: 38px;
   height: 38px;
-  border-radius: 8px;
-  object-fit: cover;
+  width: auto;
+  display: block;
 }
 
 .brand-copy span {
@@ -477,6 +476,12 @@ h1, h2, h3, p {
 .site-footer-inner:has(> div:only-child) {
   justify-content: center;
   text-align: center;
+}
+
+.footer-logo {
+  height: 20px;
+  width: auto;
+  display: inline-block;
 }
 
 /* ---------- Responsive ---------- */
